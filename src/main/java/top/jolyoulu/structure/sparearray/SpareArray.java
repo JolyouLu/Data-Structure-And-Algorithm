@@ -3,6 +3,7 @@ package top.jolyoulu.structure.sparearray;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  * @Author: JolyouLu
@@ -13,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class SpareArray {
 
     public static void main(String[] args) {
+        /**基础实现*/
         //初始化一个11*11的棋盘
         //0:没有棋子，1:黑棋子，2:蓝棋子
         int[][] chessArr = new int[11][11];
@@ -56,10 +58,7 @@ public class SpareArray {
         }
         //打印棋盘内容
         System.out.println("打印稀疏数组内容");
-        for (int i = 0; i < sparseArr.length; i++) {
-            System.out.printf("%d\t%d\t%d\t\n",sparseArr[i][0],sparseArr[i][1],sparseArr[i][2]);
-        }
-        outputFile(sparseArr);
+        println(sparseArr);
         //稀疏数组恢复为二维数组
         System.out.println("稀疏数组恢复为二维数组");
         //获取二维数组行列
@@ -71,8 +70,18 @@ public class SpareArray {
         }
         System.out.println("稀疏数组恢复为二维数组后内容");
         println(sparseArr2chessArr);
+
+        /**提升练习，将稀疏数组写入到文件中别去解析出来*/
+        System.out.println("\n\n提升练习:将稀疏数组写入到文件中别去解析出来");
+        System.out.println("使用IO流把稀疏数组写入到：sparseArr.txt文件中");
+        outputFile(sparseArr);
+        System.out.println("将sparseArr.txt文件中，稀疏数组导入进来");
+        int[][] inputFile = InputFile();
+        System.out.println("打印稀疏数组内容");
+        println(inputFile);
     }
 
+    //打印
     private static void println(int[][] array){
         for (int[] row : array) {
             for (int data : row) {
@@ -82,6 +91,7 @@ public class SpareArray {
         }
     }
 
+    //导出成文件
     private static void outputFile(int[][] array){
         File file = new File("src/main/resources/sparseArr.txt");
         try(FileOutputStream os = new FileOutputStream(file)) {
@@ -92,19 +102,32 @@ public class SpareArray {
                 for (int data : row) {
                     os.write((data+",").getBytes(StandardCharsets.UTF_8));
                 }
-                os.write(new byte[]{'\n'});
+                os.write("@".getBytes(StandardCharsets.UTF_8));
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    //@TODO
-    private static int[][] InputFile(int[][] array){
-//        int[][] res = new int[][];
+    //导入成文件
+    private static int[][] InputFile(){
         File file = new File("src/main/resources/sparseArr.txt");
         try(FileInputStream is = new FileInputStream(file)) {
-            int read = is.read();
+            Scanner scanner = new Scanner(is).useDelimiter("@");
+            String[] row1 = scanner.next().split(",");
+            int sum = Integer.parseInt(row1[2]);
+            int[][] res = new int[sum+1][3];
+            res[0][0] = Integer.parseInt(row1[0]);
+            res[0][1] = Integer.parseInt(row1[1]);
+            res[0][2] = Integer.parseInt(row1[2]);
+
+            for (int i = 1; i <= sum; i++) {
+                String[] split = scanner.next().split(",");
+                res[i][0] = Integer.parseInt(split[0]);
+                res[i][1] = Integer.parseInt(split[1]);
+                res[i][2] = Integer.parseInt(split[2]);
+            }
+            return res;
         }catch (Exception e){
             e.printStackTrace();
         }
