@@ -71,7 +71,7 @@ public class SpareArray {
         System.out.println("稀疏数组恢复为二维数组后内容");
         println(sparseArr2chessArr);
 
-        /**提升练习，将稀疏数组写入到文件中别去解析出来*/
+        /**扩展练习，将稀疏数组保存到文件中在解析出来*/
         System.out.println("\n\n提升练习:将稀疏数组写入到文件中别去解析出来");
         System.out.println("使用IO流把稀疏数组写入到：sparseArr.txt文件中");
         outputFile(sparseArr);
