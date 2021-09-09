@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @Author: JolyouLu
  * @Date: 2021/8/24 21:22
  * @Version 1.0
+ * 环形队列-数组实现
  */
 public class ArrayQueueDemo {
     public static void main(String[] args) {
