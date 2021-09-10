@@ -1,6 +1,4 @@
-package top.jolyoulu.queue;
-
-import sun.security.provider.ConfigFile;
+package top.jolyoulu.队列.环形队列;
 
 import java.util.Scanner;
 

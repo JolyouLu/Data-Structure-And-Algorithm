@@ -1,4 +1,4 @@
-package top.jolyoulu.structure.sparearray;
+package top.jolyoulu.数组.稀疏数组;
 
 
 import java.io.*;
