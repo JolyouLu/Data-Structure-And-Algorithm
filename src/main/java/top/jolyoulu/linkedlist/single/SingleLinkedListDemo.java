@@ -1,12 +1,8 @@
-package top.jolyoulu.linkedlist;
+package top.jolyoulu.linkedlist.single;
 
 import lombok.Data;
-import lombok.ToString;
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.io.*;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Stack;
 
 /**
@@ -114,7 +110,7 @@ class SingleLinkedList{
             System.out.println("链表为空");
             return;
         }
-        //找到需要修改的节点
+        //找到需要修改的节点，是上一个节点
         HeroNode temp = head;
         boolean flag = false; //如果true表示找到节点
         do {
