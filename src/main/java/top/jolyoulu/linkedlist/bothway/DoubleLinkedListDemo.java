@@ -21,6 +21,12 @@ public class DoubleLinkedListDemo {
         linkedList.add(new HeroNode(1,"张三","zs"));
         linkedList.add(new HeroNode(3,"王五","ww"));
         linkedList.print();
+        System.out.println("=======================有序链表=======================");
+        linkedList = new DoubleLinkedList();
+        linkedList.addByOrder(new HeroNode(2,"李四","ls"));
+        linkedList.addByOrder(new HeroNode(1,"张三","zs"));
+        linkedList.addByOrder(new HeroNode(3,"王五","ww"));
+        linkedList.print();
         System.out.println("=======================修改节点=======================");
         linkedList.update(new HeroNode(3,"赵六","zl"));
         linkedList.print();
@@ -63,6 +69,39 @@ class DoubleLinkedList {
 
         heroNode.next = tail;
         tail.pre = heroNode;
+    }
+
+    //有序添加，根据no排序
+    public void addByOrder(HeroNode heroNode){
+        //因为head节点不能动，所有需要一个临时变量
+        HeroNode temp = head;
+        boolean flag = false; //添加的编号是否存在
+        //遍历查询
+        while (true){
+            //temp已经遍历到末尾节点了，退出循环
+            if (temp == tail){
+                break;
+            }
+            //如果当前节点大于
+            if (temp.no > heroNode.no){
+                break;
+            }else if (temp.no == heroNode.no){ //相同说明存在不在添加
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+        //如果flag=true 表示编号已经存在不插入
+        if (flag){
+            System.out.println("插入的编号已经存在不能添加: "+heroNode);
+        }else {
+            //插入数据
+            temp.pre.next = heroNode;
+            heroNode.pre = temp.pre;
+
+            heroNode.next = temp;
+            temp.pre = heroNode;
+        }
     }
 
     //修改节点信息，根据no修改
