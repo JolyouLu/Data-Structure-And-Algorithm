@@ -33,6 +33,8 @@ public class DoubleLinkedListDemo {
         System.out.println("=======================删除节点=======================");
         linkedList.delete(3);
         linkedList.print();
+        System.out.println("=======================反向打印=======================");
+        linkedList.reversalPrint();
     }
 }
 
@@ -169,6 +171,20 @@ class DoubleLinkedList {
             System.out.println(temp);
         }while ((temp = temp.next) != tail);
     }
+
+    //反向打印节点
+    public void reversalPrint(){
+        //判断链表是否为空
+        if (tail.pre == head){
+            System.out.println("链表为空");
+            return;
+        }
+        HeroNode temp = tail.pre;
+        do {
+            System.out.println(temp);
+        }while ((temp = temp.pre) != head);
+    }
+
 
     //获取单链表节点个数
     public int size(){
