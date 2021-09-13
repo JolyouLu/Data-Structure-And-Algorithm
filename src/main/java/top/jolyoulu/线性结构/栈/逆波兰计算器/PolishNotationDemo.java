@@ -64,7 +64,7 @@ class Expression{
                 }
             }
             //如果是数字直接压入s2
-            if (temp.matches("\\d+")){
+            if (temp.matches("(\\d+)|(-\\d+)")){
                 s2.push(temp);
             //否则如果是操作数
             }else if (temp.matches("[\\+\\-\\*\\/]")){
