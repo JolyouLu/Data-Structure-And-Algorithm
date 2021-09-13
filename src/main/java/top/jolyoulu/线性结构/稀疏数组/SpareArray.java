@@ -1,4 +1,4 @@
-package top.jolyoulu.数组.稀疏数组;
+package top.jolyoulu.线性结构.稀疏数组;
 
 
 import java.io.*;
