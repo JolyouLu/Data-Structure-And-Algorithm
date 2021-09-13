@@ -1,5 +1,7 @@
 package top.jolyoulu.线性结构.栈;
 
+import java.util.Scanner;
+
 /**
  * @Author: JolyouLu
  * @Date: 2021/9/13 9:45
