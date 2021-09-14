@@ -1,4 +1,4 @@
-package top.jolyoulu.线性结构.环形队列;
+package top.jolyoulu.队列.环形队列;
 
 import java.util.Scanner;
 
