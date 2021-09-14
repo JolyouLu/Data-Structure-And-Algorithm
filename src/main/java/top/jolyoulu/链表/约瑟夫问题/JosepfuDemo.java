@@ -1,4 +1,4 @@
-package top.jolyoulu.线性结构.稀疏数组.链表.约瑟夫问题;
+package top.jolyoulu.链表.约瑟夫问题;
 
 import lombok.Data;
 
