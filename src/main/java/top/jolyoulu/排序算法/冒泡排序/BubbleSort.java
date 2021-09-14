@@ -1,6 +1,7 @@
 package top.jolyoulu.排序算法.冒泡排序;
 
 import top.jolyoulu.utils.IntGenerate;
+import top.jolyoulu.utils.TimerUtils;
 
 import java.util.Arrays;
 
@@ -36,10 +37,12 @@ public class BubbleSort {
         //构建8W随机数组
         System.out.println("============================8W数据排序耗时============================");
         int[] array = new IntGenerate().array(80000);
-        long start = System.currentTimeMillis();
-        bubbleSort(array);
-        long end = System.currentTimeMillis();
-        System.out.println("排序耗时："+(end-start)+"毫秒");
+        TimerUtils.timer(new TimerUtils.Task() {
+            @Override
+            public void run() {
+                bubbleSort(array);
+            }
+        });
     }
 
     public static void bubbleSort(int[] arr){
