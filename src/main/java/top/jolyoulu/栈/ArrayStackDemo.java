@@ -1,6 +1,4 @@
-package top.jolyoulu.线性结构.栈;
-
-import java.util.Scanner;
+package top.jolyoulu.栈;
 
 /**
  * @Author: JolyouLu
