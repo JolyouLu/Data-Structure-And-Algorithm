@@ -21,10 +21,12 @@ public class EightQueen {
     //定义一个保存结果的数组，格式array[i]=x,棋盘的第i+1个皇后，放在第i+1行的x+1列
     int[] array = new int[max];
     static int count = 0;
+    static int judge = 0;
     public static void main(String[] args) {
         EightQueen eightQueen = new EightQueen();
         eightQueen.check(0);
         System.out.printf("共有%d个解法\n",count);
+        System.out.printf("共进行了%d次冲突判断\n",judge);
     }
 
     //放置第n个皇后
@@ -51,6 +53,7 @@ public class EightQueen {
 
     //查看当放第n个皇后时，是否与前面摆放的皇后冲突
     private boolean judge(int n){
+        judge++;
         for (int i = 0; i < n; i++) {
             //array[i] == array[n] 在同一列
             //Math.abs(n-i) == Math.abs(array[n] - array[i]) 是否在同一斜线上
