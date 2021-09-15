@@ -1,5 +1,6 @@
 package top.jolyoulu.排序算法.冒泡排序;
 
+import top.jolyoulu.utils.ArgsGenerate;
 import top.jolyoulu.utils.IntGenerate;
 import top.jolyoulu.utils.TimerUtils;
 
@@ -21,10 +22,10 @@ import java.util.Arrays;
  *    第2次比较：取5与3比较，交换，结果[1,3,5,2]
  *    第3次比较：取5与2比较，不变，结果[1,3,2,5]
  * 第二轮：
- *    第1次比较：取1与3比较，不变，[1,3,2,5]
- *    第2次比较：取3与2比较，交换，[1,2,3,5]
+ *    第1次比较：取1与3比较，不变，结果[1,3,2,5]
+ *    第2次比较：取3与2比较，交换，结果[1,2,3,5]
  * 第三轮：
- *    第1次比较：取1与3比较，不变，[1,3,2,5]
+ *    第1次比较：取1与3比较，不变，结果[1,3,2,5]
  */
 public class BubbleSort {
     public static void main(String[] args) {
