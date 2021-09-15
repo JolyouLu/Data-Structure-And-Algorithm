@@ -30,7 +30,7 @@ public class SelectSort {
         System.out.println(Arrays.toString(arr));
 
         //构建8W随机数组
-        System.out.println("============================8W数据排序耗时============================");
+        System.out.println("============================8W随机数排序耗时============================");
         int[] array = new IntGenerate().array(80000);
         TimerUtils.timer(new TimerUtils.Task() {
             @Override
