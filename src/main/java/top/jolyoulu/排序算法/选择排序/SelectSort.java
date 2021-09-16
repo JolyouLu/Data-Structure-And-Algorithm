@@ -9,7 +9,7 @@ import java.util.Arrays;
  * @Author: JolyouLu
  * @Date: 2021/9/15 11:31
  * @Version 1.0
- * 选择排序算法，时间复杂度O(n^2)
+ * 选择排序算法
  *
  * 1)、遍历数组从arr[0]至arr[len-1]得到最小值下标，与arr[0]交换
  * 2)、遍历数组从arr[1]至arr[len-1]得到最小值下标，与arr[1]交换
