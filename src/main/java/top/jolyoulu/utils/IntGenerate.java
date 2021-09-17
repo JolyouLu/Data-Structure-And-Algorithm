@@ -12,7 +12,7 @@ public class IntGenerate implements Generate<Integer>{
 
     @Override
     public Integer next() {
-        return random.nextInt();
+        return random.nextInt(1000);
     }
 
     /**
