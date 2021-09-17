@@ -1,4 +1,4 @@
-package top.jolyoulu.排序算法.快速排序;
+package top.jolyoulu.算法.排序算法.快速排序;
 
 import top.jolyoulu.utils.IntGenerate;
 import top.jolyoulu.utils.TimerUtils;
