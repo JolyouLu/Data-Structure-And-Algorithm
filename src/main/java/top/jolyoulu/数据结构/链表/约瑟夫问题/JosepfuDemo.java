@@ -1,4 +1,4 @@
-package top.jolyoulu.链表.约瑟夫问题;
+package top.jolyoulu.数据结构.链表.约瑟夫问题;
 
 import lombok.Data;
 
