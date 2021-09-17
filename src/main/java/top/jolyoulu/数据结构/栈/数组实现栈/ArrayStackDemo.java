@@ -1,4 +1,4 @@
-package top.jolyoulu.栈.数组实现栈;
+package top.jolyoulu.数据结构.栈.数组实现栈;
 
 /**
  * @Author: JolyouLu
