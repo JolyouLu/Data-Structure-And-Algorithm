@@ -1,4 +1,4 @@
-package top.jolyoulu.递归算法.八皇后;
+package top.jolyoulu.算法.递归算法.八皇后;
 
 /**
  * @Author: JolyouLu

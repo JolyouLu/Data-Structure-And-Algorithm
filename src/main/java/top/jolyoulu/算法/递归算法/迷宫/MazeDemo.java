@@ -1,4 +1,4 @@
-package top.jolyoulu.递归算法.迷宫;
+package top.jolyoulu.算法.递归算法.迷宫;
 
 import lombok.Data;
 
