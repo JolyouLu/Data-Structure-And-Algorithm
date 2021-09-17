@@ -1,6 +1,5 @@
-package top.jolyoulu.排序算法.冒泡排序;
+package top.jolyoulu.算法.排序算法.冒泡排序;
 
-import top.jolyoulu.utils.ArgsGenerate;
 import top.jolyoulu.utils.IntGenerate;
 import top.jolyoulu.utils.TimerUtils;
 
