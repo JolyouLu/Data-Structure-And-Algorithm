@@ -1,4 +1,4 @@
-package top.jolyoulu.链表.单向链表;
+package top.jolyoulu.数据结构.链表.单向链表;
 
 import lombok.Data;
 
