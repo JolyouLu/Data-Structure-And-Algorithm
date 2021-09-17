@@ -1,4 +1,4 @@
-package top.jolyoulu.栈.中缀计算器;
+package top.jolyoulu.数据结构.栈.中缀计算器;
 
 import java.util.Scanner;
 
