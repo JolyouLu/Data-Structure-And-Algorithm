@@ -12,10 +12,10 @@ public class HashTableDemo {
     public static void main(String[] args) {
         HashTable hashTable = new HashTable(5);
         System.out.println("====================插入数据====================");
+        hashTable.add(new Emp(11,"test11"));
+        hashTable.add(new Emp(6,"test6"));
         hashTable.add(new Emp(1,"test1"));
         hashTable.add(new Emp(2,"test2"));
-        hashTable.add(new Emp(6,"test6"));
-        hashTable.add(new Emp(11,"test11"));
         hashTable.list();
         System.out.println("====================查找数据====================");
         System.out.println("查找id=6的雇员信息 => "+hashTable.findEmpById(6));
@@ -80,21 +80,33 @@ class EmpLInkedList{
     //头指针指向第一个emp对象，默认null
     private Emp head;
 
-    //添加雇员到链表，无序链表，可优化为有序
+    //添加雇员到链表，有序链表
     public void add(Emp emp){
         //如果是链表第一个，直接覆盖head即可
         if (head == null){
             head = emp;
             return;
         }
+        //如果添加元素小于头元素，插入头元素前面
+        if (emp.getId() < head.getId()){
+            emp.setNext(head);
+            head = emp;
+            return;
+        }
         //不是第一个着遍历直到最后，并且插入元素
         Emp curEmp = head;
         while (true){
+            //如果到尾部结束
             if (curEmp.getNext() == null){
+                break;
+            }
+            //如果下一个id小于当前雇员id，
+            if (emp.getId() < curEmp.getNext().getId()){
                 break;
             }
             curEmp = curEmp.getNext();
         }
+        emp.setNext(curEmp.getNext());
         curEmp.setNext(emp);
     }
 
@@ -147,25 +159,25 @@ class EmpLInkedList{
         if (head == null){
             return;
         }
+        //如果是头元素，直接取出头部
+        if (head.getId() == id){
+            head = head.getNext();
+            return;
+        }
         //遍历链表查找元素
         Emp curEmp = head;
         while (true){
             //如果到最后一个了表示找不到，返回null
             if (curEmp.getNext() == null){
-                return;
-            }
-            //如果是头元素
-            if (curEmp.getId() == id){
-                head = curEmp.getNext();
-                return;
+                break;
             }
             //找到了结束循环
             if (curEmp.getNext().getId() == id){
-                curEmp.setNext(curEmp.getNext().getNext());
-                return;
+                break;
             }
             curEmp = curEmp.getNext();
         }
+        curEmp.setNext(curEmp.getNext().getNext());
     }
 }
 //表示一个雇员
