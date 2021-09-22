@@ -23,7 +23,7 @@ package top.jolyoulu.数据结构.树.顺序存储二叉树;
 public class ArrayBinaryTreeDemo {
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5,6,7};
-        new ArrayBinaryTree(arr).preOrder(0);
+        new ArrayBinaryTree(arr).preOrder();
     }
 }
 class ArrayBinaryTree{
@@ -32,6 +32,11 @@ class ArrayBinaryTree{
 
     public ArrayBinaryTree(int[] arr) {
         this.arr = arr;
+    }
+
+    //重载
+    public void preOrder(){
+        this.preOrder(0);
     }
 
     //前序遍历打印顺序存储二叉树
