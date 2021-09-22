@@ -23,7 +23,7 @@ package top.jolyoulu.数据结构.树.顺序存储二叉树;
 public class ArrayBinaryTreeDemo {
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5,6,7};
-        new ArrayBinaryTree(arr).preOrder();
+        new ArrayBinaryTree(arr).postOrder();
     }
 }
 class ArrayBinaryTree{
@@ -54,5 +54,49 @@ class ArrayBinaryTree{
         if ((2*index+2) < arr.length){
             preOrder(2*index+2);
         }
+    }
+
+    //重载
+    public void infixOrder(){
+        this.infixOrder(0);
+    }
+
+    //中序遍历打印顺序存储二叉树
+    public void infixOrder(int index){
+        if (arr == null || arr.length == 0){
+            System.out.println("顺序存储二叉树为空");
+        }
+        //向左递归遍历，判断即使后下标是否越界
+        if ((2*index+1) < arr.length){
+            infixOrder(2*index+1);
+        }
+        //输出当前元素
+        System.out.println(arr[index]);
+        //向由递归遍历，判断即使后下标是否越界
+        if ((2*index+2) < arr.length){
+            infixOrder(2*index+2);
+        }
+    }
+
+    //重载
+    public void postOrder(){
+        this.postOrder(0);
+    }
+
+    //后序遍历打印顺序存储二叉树
+    public void postOrder(int index){
+        if (arr == null || arr.length == 0){
+            System.out.println("顺序存储二叉树为空");
+        }
+        //向左递归遍历，判断即使后下标是否越界
+        if ((2*index+1) < arr.length){
+            postOrder(2*index+1);
+        }
+        //向由递归遍历，判断即使后下标是否越界
+        if ((2*index+2) < arr.length){
+            postOrder(2*index+2);
+        }
+        //输出当前元素
+        System.out.println(arr[index]);
     }
 }
