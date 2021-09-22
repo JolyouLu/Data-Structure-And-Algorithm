@@ -11,6 +11,8 @@ import java.util.List;
  * @Date: 2021/9/22 16:33
  * @Version 1.0
  * 赫夫曼树
+ * wpl最小的树(即所有叶子节点带权路径和最小树)
+ *
  */
 public class HuffmanTree {
     public static void main(String[] args) {
