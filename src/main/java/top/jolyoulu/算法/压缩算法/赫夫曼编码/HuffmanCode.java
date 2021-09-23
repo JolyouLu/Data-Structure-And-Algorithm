@@ -1,8 +1,12 @@
 package top.jolyoulu.算法.压缩算法.赫夫曼编码;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.sun.org.apache.xalan.internal.xsltc.dom.SAXImpl;
 import lombok.Data;
 
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -64,7 +68,12 @@ public class HuffmanCode {
         System.out.println(Arrays.toString(decode));
         System.out.println(new String(decode));
 
+        System.out.println("=======================提升练习，文件压缩=======================");
+        zipFile("src/main/resources/1.jpg","src/main/resources/1.HFZip");
+        unZipFile("src/main/resources/1.HFZip","src/main/resources/unzip.jpg");
+
     }
+
     //数据解压
     //1.将内容转2进制字符串
     //2.对照赫夫曼编码表，转成的字符串
@@ -134,9 +143,8 @@ public class HuffmanCode {
     }
 
     //封装压缩过程
-    public static byte[] huffmanZip(String content){
+    public static byte[] huffmanZip(byte[] contentBytes){
 //        System.out.println("=======================原文转字节数组=======================");
-        byte[] contentBytes = content.getBytes();
 //        System.out.println(Arrays.toString(contentBytes));
 //        System.out.println("压缩前长度 = " + contentBytes.length);
 //        System.out.println("=======================权值计算=======================");
@@ -282,6 +290,64 @@ public class HuffmanCode {
     private static void preOrder(Node root) {
         if (root != null) {
             root.preOrder();
+        }
+    }
+
+    //提升练习文件压缩
+    public static void zipFile(String srcFile,String dstFile){
+        FileInputStream in = null;
+        FileOutputStream out = null;
+        ObjectOutputStream oos = null;
+        try {
+            in = new FileInputStream(srcFile);
+            byte[] b = new byte[in.available()];
+            in.read(b);
+            //压缩
+            byte[] huffmanZip = huffmanZip(b);
+            //构建输出流
+            out = new FileOutputStream(dstFile);
+            oos = new ObjectOutputStream(out);
+            //将数据与赫夫曼编码表写入到对象流中
+            oos.writeObject(huffmanZip);
+            oos.writeObject(huffmanCodes);
+            oos.flush();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                in.close();
+                out.close();
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //解压压缩文件
+    public static void unZipFile(String srcFile,String dstFile){
+        FileInputStream in = null;
+        ObjectInputStream ois = null;
+        FileOutputStream out = null;
+        try {
+            in = new FileInputStream(srcFile);
+            ois = new ObjectInputStream(in);
+            byte[] huffmanZip = (byte[]) ois.readObject();
+            Map<Byte, String> huffmanCodes = (Map<Byte, String>) ois.readObject();
+            byte[] bytes = decode(huffmanCodes, huffmanZip);
+            out = new FileOutputStream(dstFile);
+            out.write(bytes);
+            out.flush();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                in.close();
+                out.close();
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
