@@ -28,6 +28,9 @@ public class BinarySortTreeDemo {
         tree.add(new Node(2));
         tree.delNode(1);
         tree.infixOrder();
+        System.out.println("=====================删除2个子树叶子节点=====================");
+        tree.delNode(10);
+        tree.infixOrder();
     }
 }
 //定义二叉顺序树
@@ -68,6 +71,18 @@ class BinarySortTree{
         }else {
             return root.searchParent(value);
         }
+    }
+
+    //以传入node作为根节点循环向左节点查找返回最小节点的值
+    public int delRightTreeMin(Node node){
+        Node target = node;
+        //一直向左边获取，直到最左叶子节点，即最小节点
+        while (target.getLeft() != null){
+            target = target.getLeft();
+        }
+        //删除最小节点
+        delNode(target.getValue());
+        return target.getValue();
     }
 
     /***
@@ -130,8 +145,10 @@ class BinarySortTree{
                 }
             //如果是有2个子树的节点
             }else if (targetNode.getLeft() != null && targetNode.getRight() != null){
-
-            //如果只有1个子树的节点
+                //已当前节点右子节点为根节点，找到最小值
+                int min = delRightTreeMin(targetNode.getRight());
+                targetNode.setValue(min);
+                //如果只有1个子树的节点
             } else {
                 //如果targetNode只有左子节点
                 if (targetNode.getLeft() != null) {
