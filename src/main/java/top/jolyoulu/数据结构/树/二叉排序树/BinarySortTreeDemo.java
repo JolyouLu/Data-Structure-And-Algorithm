@@ -148,25 +148,35 @@ class BinarySortTree{
                 //已当前节点右子节点为根节点，找到最小值
                 int min = delRightTreeMin(targetNode.getRight());
                 targetNode.setValue(min);
-                //如果只有1个子树的节点
+            //如果只有1个子树的节点
             } else {
                 //如果targetNode只有左子节点
                 if (targetNode.getLeft() != null) {
-                    //如果targetNode是parent的左子节点
-                    if (parent.getLeft().getValue() == value) {
-                        parent.setLeft(targetNode.getLeft());
-                    //如果targetNode是parent的右子节点
-                    } else {
-                        parent.setRight(targetNode.getLeft());
+                    if (parent != null){
+                        //如果targetNode是parent的左子节点
+                        if (parent.getLeft().getValue() == value) {
+                            parent.setLeft(targetNode.getLeft());
+                            //如果targetNode是parent的右子节点
+                        } else {
+                            parent.setRight(targetNode.getLeft());
+                        }
+                    //当前节点没有父节点，那么表示该节点是root节点
+                    }else {
+                        root = targetNode.getLeft();
                     }
                 //如果targetNode只有右子节点
                 } else {
-                    //如果targetNode是parent的左子节点
-                    if (parent.getLeft().getValue() == value) {
-                        parent.setLeft(targetNode.getRight());
-                    //如果targetNode是parent的右子节点
-                    } else {
-                        parent.setRight(targetNode.getRight());
+                    if (parent != null){
+                        //如果targetNode是parent的左子节点
+                        if (parent.getLeft().getValue() == value) {
+                            parent.setLeft(targetNode.getRight());
+                        //如果targetNode是parent的右子节点
+                        } else {
+                            parent.setRight(targetNode.getRight());
+                        }
+                    //当前节点没有父节点，那么表示该节点是root节点
+                    }else {
+                        root = targetNode.getRight();
                     }
                 }
             }
