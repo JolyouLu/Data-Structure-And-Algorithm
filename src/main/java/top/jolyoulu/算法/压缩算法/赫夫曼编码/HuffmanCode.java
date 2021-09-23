@@ -144,22 +144,10 @@ public class HuffmanCode {
 
     //封装压缩过程
     public static byte[] huffmanZip(byte[] contentBytes){
-//        System.out.println("=======================原文转字节数组=======================");
-//        System.out.println(Arrays.toString(contentBytes));
-//        System.out.println("压缩前长度 = " + contentBytes.length);
-//        System.out.println("=======================权值计算=======================");
         List<Node> nodes = getNodes(contentBytes);
-//        System.out.println(nodes);
-//        System.out.println("=======================赫夫曼树构建=======================");
         Node node = creatHuffmanTree(nodes);
-//        preOrder(node);
-//        System.out.println("=======================获取哈夫曼编码表=======================");
         Map<Byte, String> huffmanCodes = getCodes(node);
-//        System.out.println(huffmanCodes);
-//        System.out.println("=======================使用赫夫曼压缩数据=======================");
         byte[] zip = zip(contentBytes, huffmanCodes);
-//        System.out.println(Arrays.toString(zip));
-//        System.out.println("压缩后长度 = " + zip.length);
         return zip;
     }
 
