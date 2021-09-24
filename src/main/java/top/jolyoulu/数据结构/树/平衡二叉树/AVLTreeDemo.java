@@ -32,6 +32,16 @@ public class AVLTreeDemo {
         System.out.println("树最大高度 = "+tree.getRoot().height());
         System.out.println("左子树高度 = "+tree.getRoot().leftHeight());
         System.out.println("右子树高度 = "+tree.getRoot().rightHeight());
+        System.out.println("=====================双旋测试=====================");
+        tree = new AVLTree();
+        int[] arr3 = {10,11,7,6,8,9};
+        for (int i : arr3){
+            tree.add(new Node(i));
+        }
+        tree.infixOrder();
+        System.out.println("树最大高度 = "+tree.getRoot().height());
+        System.out.println("左子树高度 = "+tree.getRoot().leftHeight());
+        System.out.println("右子树高度 = "+tree.getRoot().rightHeight());
     }
 }
 @Data
@@ -293,12 +303,30 @@ class Node{
 
         //添加节点后判断右子树高度 - 左子树高度 > 1，左选择
         if (rightHeight() - leftHeight() > 1){
-            leftRotate();
+            //如果当前节点的右子节点，左子树高度大于右子树高度
+            //那么需要让右子节点右旋转，在让当前节点左旋
+            if (right != null && left.rightHeight() > left.leftHeight()){
+                //先对右子树进行右旋转
+                right.rightRotate();
+                leftRotate();
+            }else {
+                leftRotate();
+            }
+            return; //平衡后可以退出了，继续往下走可能会出问题
         }
 
         //添加节点后判断左子树高度 - 右子树高度 > 1，右选择
         if (leftHeight() - rightHeight() > 1){
-            rightRotate();
+            //如果当前节点的左子节点，右子树高度大于左子树高度
+            //那么需要让左子节点左旋转，在让当前节点右旋
+            if (left != null && left.rightHeight() > left.leftHeight()){
+                //先对左子树进行左旋转
+                left.leftRotate();
+                rightRotate();
+            }else {
+                rightRotate();
+            }
+            return;
         }
     }
 
