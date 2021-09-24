@@ -1,4 +1,4 @@
-package top.jolyoulu.数据结构.树.二叉平衡树;
+package top.jolyoulu.数据结构.树.平衡二叉树;
 
 import lombok.Data;
 
