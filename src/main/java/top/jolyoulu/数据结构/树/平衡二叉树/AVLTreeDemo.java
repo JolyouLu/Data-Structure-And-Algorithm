@@ -11,16 +11,27 @@ import lombok.Data;
  */
 public class AVLTreeDemo {
     public static void main(String[] args) {
-        AVLTree tree = new AVLTree();
-        int[] arr = {4,3,6,5,7,8};
-        System.out.println("=====================添加数据=====================");
-        for (int i : arr){
+        AVLTree tree = null;
+        System.out.println("=====================左旋测试=====================");
+        tree = new AVLTree();
+        int[] arr1 = {4,3,6,5,7,8};
+        for (int i : arr1){
             tree.add(new Node(i));
         }
         tree.infixOrder();
-        System.out.println(tree.getRoot().height());
-        System.out.println(tree.getRoot().getLeft().height());
-        System.out.println(tree.getRoot().getRight().height());
+        System.out.println("树最大高度 = "+tree.getRoot().height());
+        System.out.println("左子树高度 = "+tree.getRoot().leftHeight());
+        System.out.println("右子树高度 = "+tree.getRoot().rightHeight());
+        System.out.println("=====================右旋测试=====================");
+        tree = new AVLTree();
+        int[] arr2 = {10,12,8,9,7,6};
+        for (int i : arr2){
+            tree.add(new Node(i));
+        }
+        tree.infixOrder();
+        System.out.println("树最大高度 = "+tree.getRoot().height());
+        System.out.println("左子树高度 = "+tree.getRoot().leftHeight());
+        System.out.println("右子树高度 = "+tree.getRoot().rightHeight());
     }
 }
 @Data
@@ -205,12 +216,12 @@ class Node{
     }
 
     /**
-     * 左旋转(当节点右子树高度 - 左子树高度 > 1，需左旋转)
+     * 左旋转(当节点右子树高度 - 左子树高度 > 1，需左旋转降低右子树高度)
      *     旋转过程=>        1.拷贝一个当前节点值   2.将新的节点左子树       3.将新节点是右子树              4.将当前节点的值          5.将当前节点的右子树        6.将当前节点的左子树
      *                       作为新节点           设置为当前节点的左子树     设置为当前节点的右子树的左子树     替换成右边子节点          设置为右子树的右子树        设置为新节点
-     *      [4]              [4]    [4]            [4]  [4]              [4]    [4]                [4]    [6]                [4]    [6]                  [6]
+     *      [4]              [4新]   [4]            [4新] [4]              [4新]  [4]                [4新]  [6]                [4新]  [6]                  [6]
      *      / \                     / \            /      \              /  \     \                /  \     \                /  \     \                  / \
-     *    [3] [6]     ==>       [3] [6]    ==>   [3]      [6]    ==>   [3] [5]    [6]      ==>   [3] [5]    [6]      ==>   [3] [5]    [7]    ==>      [4]  [7]
+     *    [3] [6]     ==>       [3] [6]    ==>   [3]      [6]    ==>   [3] [5]    [6]      ==>   [3] [5]    [6]      ==>   [3] [5]    [7]    ==>      [4新] [7]
      *        / \                  / \                    / \                       \                         \                         \             / \    \
      *      [5] [7]              [5] [7]                [5] [7]                     [7]                       [7]                       [8]        [3]  [5]  [8]
      *           \                    \                      \                        \                         \
@@ -229,6 +240,33 @@ class Node{
         right = right.getRight();
         //将当前节点的左子树设置为新节点
         left = newNode;
+    }
+
+    /**
+     * 右旋转(当节点左子树高度 - 右子树高度 > 1，需右旋转降低左子树高度)
+     *     旋转过程=>        1.拷贝一个当前节点值     2.将新的节点右子树           3.将新节点是左子树               4.将当前节点的值           5.将当前节点的左子树         6.将当前节点的右子树
+     *                       作为新节点            设置为当前节点的右子树        设置为当前节点的左子树的右子树      替换成左边子节点            设置为左子树的左子树         设置为新节点
+     *         [10]             [10]    [10新]          [10]    [10新]           [10]    [10新]                [8]    [10新]            [8]    [10新]          [8]
+     *         / \              / \                    /         \              /       / \                  /       / \              /       / \            / \
+     *      [8] [12]  ==>    [8] [12]        ==>    [8]          [12] ==>    [8]     [9]  [12]     ==>    [8]     [9]  [12] ==>    [7]     [9]  [12] ==>  [7]  [10新]
+     *      / \              / \                    / \                      /                            /                        /                      /    / \
+     *    [7] [9]          [7] [9]                [7] [9]                  [7]                          [7]                      [6]                    [6]  [9] [12]
+     *    /                /                      /                        /                            /
+     *  [6]              [6]                    [6]                      [6]                          [6]
+     */
+    public void rightRotate(){
+        //拷贝一个当前节点值，作为新节点
+        Node newNode = new Node(value);
+        //将新的节点右子树，设置为当前节点的右子树
+        newNode.setRight(right);
+        //将新节点是左子树，设置为当前节点的左子树的右子树
+        newNode.setLeft(left.getRight());
+        //将当前节点的值替换成左边子节点
+        value = left.getValue();
+        //将当前节点的左子树设置为左子树的左子树
+        left = left.getLeft();
+        //将当前节点的右子树设置为新节点
+        right = newNode;
     }
 
     //递归添加节点添加
@@ -256,6 +294,11 @@ class Node{
         //添加节点后判断右子树高度 - 左子树高度 > 1，左选择
         if (rightHeight() - leftHeight() > 1){
             leftRotate();
+        }
+
+        //添加节点后判断左子树高度 - 右子树高度 > 1，右选择
+        if (leftHeight() - rightHeight() > 1){
+            rightRotate();
         }
     }
 
