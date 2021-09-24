@@ -1,9 +1,6 @@
-package top.jolyoulu.数据结构.树.二叉排序树;
+package top.jolyoulu.数据结构.树.排序二叉树;
 
 import lombok.Data;
-import lombok.ToString;
-
-import java.lang.annotation.Target;
 
 /**
  * @Author: JolyouLu
