@@ -2,6 +2,7 @@ package top.jolyoulu.数据结构.图.邻接矩阵;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -43,8 +44,11 @@ public class GraphDemo{
         graph.insertEdge(1,4,1);
         System.out.println("================打印邻接矩阵================");
         graph.print();
-        System.out.println("================深度遍历================");
-        graph.dfs();
+        System.out.println("================深度优先遍历================");
+//        graph.dfs();
+        System.out.println("================广度优先遍历================");
+        graph.bfs();
+        System.out.println("");
     }
 }
 class Graph {
@@ -108,7 +112,49 @@ class Graph {
         }
     }
 
-    //遍历所有节点，都走一次dfs
+    //广度优先算法遍历图中遍历所有节点
+    public void bfs(){
+        for (int i = 0; i < getNumOfVertex(); i++) {
+            //如果该节点未被访问过
+            if (!isVisited[i]){
+                bfs(isVisited,i);
+            }
+        }
+    }
+
+    //广度优先算法遍历1个节点所关联节点
+    public void bfs(boolean[] isVisited,int i){
+        int u; //表示队列头节点对应下标
+        int w; //u节点的邻接节点下标
+        //队列，记录节点访问的顺序
+        LinkedList<Integer> queue = new LinkedList<>();
+        //访问节点，输出信息
+        System.out.print(getValueByIndex(i) + "->");
+        //标记已访问
+        isVisited[i] = true;
+        //将访问的节点加入队列
+        queue.addLast(i);
+        while (!queue.isEmpty()) {
+            //取出队列的头节点下标
+            u = queue.removeFirst();
+            //访问u第一个邻接点下的坐标
+            w = getFirstNeighbor(u);
+            while (w != -1) { //找到
+                //该节点未被访问过
+                if (!isVisited[w]) {
+                    System.out.print(getValueByIndex(w) + "->");
+                    //标记已经访问
+                    isVisited[w] = true;
+                    //入对
+                    queue.addLast(w);
+                }
+                //已u继续寻找w后面的下一个邻接点
+                w = getNextNeighbor(u, w);
+            }
+        }
+    }
+
+    //深度优先算法遍历图中遍历所有节点，都走一次dfs
     public void dfs(){
         for (int i = 0; i < getNumOfVertex(); i++) {
             //如果该节点未被访问过
@@ -119,7 +165,7 @@ class Graph {
         }
     }
 
-    //深度优先遍历算法
+    //深度优先算法遍历1个节点所关联节点
     public void dfs(boolean[] isVisited,int i){
         //访问该节点
         System.out.print(getValueByIndex(i) + "->");
@@ -161,5 +207,4 @@ class Graph {
         }
         return -1;
     }
-
 }
