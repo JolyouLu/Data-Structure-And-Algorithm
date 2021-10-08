@@ -62,7 +62,7 @@ public class HorseChessBoard {
         visited[row * x + column] = true; //标记该位置已经访问
         //获取当前位置可以走的下一个位置的集合
         ArrayList<Point> ps = next(new Point(column, row));
-        //对ps排序，对ps所有元素的下一步可移动的数目，进行非递减排序
+        //贪心算法，对ps排序，对ps所有元素的下一步可移动的数目，进行非递减排序
         sort(ps);
         //遍历list查看那些位置是可以走
         while (!ps.isEmpty()) {
