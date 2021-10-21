@@ -10,6 +10,7 @@ public class Answer1 {
         Solution solution = new Solution();
         System.out.println(solution.minMoves(new int[]{1, 2, 3}));
         System.out.println(solution.minMoves(new int[]{1, 1, 1}));
+        System.out.println(solution.minMoves(new int[]{1, 3, 4}));
     }
 }
 
